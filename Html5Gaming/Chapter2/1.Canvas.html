@@ -1,0 +1,50 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <canvas id="cavMain" width="200" height="200" style="border:solid 1px #000;">
+    </canvas>
+    <script type="text/javascript">
+        var cavDom = document.getElementById("cavMain");
+        var size = {
+            w: cavDom.width,
+            h: cavDom.height
+        };
+        var ctx = cavDom.getContext("2d");
+        ctx.moveTo(0, 0);
+        ctx.lineTo(size.w, size.h);
+        ctx.lineWidth = 1;
+        //ctx.strokeStyle = "black";
+        //Todo drawLine
+        ctx.rect(0, 0, size.w, size.h);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(20, 20);
+        ctx.lineTo(20, 70);
+        ctx.lineTo(70, 70);
+        ctx.closePath();
+        ctx.fill();
+
+        //Draw arc
+        ctx.beginPath();
+        ctx.arc(size.w / 2, size.h / 2, 50, Math.PI * -0.5, Math.PI * 0.5)
+        ctx.stroke();
+
+        //LinearGradient
+        var brush = ctx.createLinearGradient(0, 0, size.w / 2, size.h / 2);
+        for (var i = 0; i < 4; i++) {
+            brush.addColorStop(i * 0.25, "#" + Math.ceil((Math.random() * 0xffffff)).toString(16));
+        }
+        //Rect
+        ctx.beginPath();
+        ctx.rect(20, 20, size.w / 2, size.h / 2);
+        ctx.fillStyle = brush;
+        ctx.fill();
+    </script>
+
+</body>
+
+</html>

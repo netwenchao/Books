@@ -1,0 +1,61 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <img src="imgs/pic.jpg" id="sampleImg" />
+    <canvas id="cavMain" width="200" height="200" style="border:solid 1px #000;">
+    </canvas>
+    <script type="text/javascript">
+        var cavDom = document.getElementById("cavMain");
+        var img = document.getElementById("sampleImg");
+        var Glass = (function(w) {
+            var win = w;
+            var ctx = null;
+            var canvas = null;
+            var imgNode = null;
+            var rate = 30;
+            var size = {
+                x: 0,
+                w: 0
+            };
+            var draw = function(e) {
+                if (ctx != null) {
+                    var x = e.pageX,
+                        y = e.pageY;
+                    var exOff = x - imgNode.offsetLeft;
+                    var eyOff = x - imgNode.offsetTop;
+                    //console.log("x:" + x + ",y:" + y + "offsetLeft:" + imgNode.offsetLeft + ",offsetTop:" + imgNode.offsetTop);
+                    //console.log("x:" + exOff + ",y:" + eyOff);
+                    //ctx.drawImage(imgNode, size.w / 2, size.h / 2, )
+                }
+                ctx.clear
+            };
+            var scope = {
+                bind: function(img, cav) {
+                    canvas = cav;
+                    ctx = cav.getContext("2d");
+                    imgNode = img;
+                    size.w = cav.width;
+                    size.h = cav.height;
+                    document.body.onmousedown = function(e) {
+                        if (e.srcElement.id == img.id) {
+                            e.preventDefault();
+                            draw(e);
+                        }
+                    }
+                }
+            };
+            return scope;
+        })(window);
+        var size = {
+            w: cavDom.width,
+            h: cavDom.height
+        };
+        Glass.bind(document.getElementById("sampleImg"), document.getElementById("cavMain"));
+    </script>
+
+</body>
+
+</html>
